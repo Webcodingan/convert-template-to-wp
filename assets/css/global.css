@@ -1,0 +1,33 @@
+/* ============================================================
+   VaultEdge — Global: Design Tokens, Typography, Base Reset
+   Load order: 1st (before all other VaultEdge CSS)
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+/* ---- CSS VARIABLES / DESIGN TOKENS ---- */
+:root {
+  --ve-dark:   #0d1b2a;
+  --ve-dark2:  #162032;
+  --ve-navy:   #1a2f4b;
+  --ve-gold:   #d4a017;
+  --ve-gold2:  #e8b84b;
+  --ve-light:  #f4f7fb;
+  --ve-white:  #ffffff;
+  --ve-text:   #4a5568;
+  --ve-border: #e2e8f0;
+  --ve-radius: 12px;
+  --ve-shadow: 0 8px 30px rgba(13, 27, 42, 0.1);
+  --ve-trans:  all 0.3s ease;
+}
+
+/* ---- BASE FONT OVERRIDE ---- */
+body {
+  font-family: "DM Sans", sans-serif;
+  color: var(--ve-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Nunito", sans-serif;
+  color: var(--ve-dark);
+}

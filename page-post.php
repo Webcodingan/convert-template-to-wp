@@ -13,158 +13,79 @@
     </div>
 </section>
 
+<?php
+$paged       = get_query_var( 'paged' ) ?: 1;
+$posts_query = new WP_Query( [
+    'post_type'      => 'post',
+    'posts_per_page' => 6,
+    'paged'          => $paged,
+    'post_status'    => 'publish',
+] );
+?>
 <section class="ve-section">
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-8">
                 <div class="row">
-                    <div class="col-12 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                        <div class="ve-insight-card">
-                            <div class="ve-insight-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/10.jpg);">
-                            </div>
-                            <div class="ve-insight-body"><span class="ve-insight-cat">Investment</span>
-                                <h5><a href="<?php echo site_url('/single-post'); ?>">5 Smart Investment Strategies for 2025</a></h5>
-                                <p>Discover the top strategies seasoned investors use to grow wealth in volatile
-                                    markets.</p>
-                                <div class="ve-insight-meta"><span><i class="fa fa-calendar"></i> April 26</span><a
-                                        href="<?php echo site_url('/single-post'); ?>">Read More <i class="fa fa-arrow-right"></i></a>
+                    <?php if ( $posts_query->have_posts() ) : ?>
+                        <?php
+                        $delay = 100;
+                        while ( $posts_query->have_posts() ) :
+                            $posts_query->the_post();
+                            $thumb = get_the_post_thumbnail_url( null, 've-card' );
+                            $cats  = get_the_category();
+                            ?>
+                            <div class="col-12 col-md-6 wow fadeInUp" data-wow-delay="<?php echo absint( $delay ); ?>ms">
+                                <div class="ve-insight-card">
+                                    <?php if ( $thumb ) : ?>
+                                        <div class="ve-insight-img bg-img"
+                                            style="background-image:url(<?php echo esc_url( $thumb ); ?>);">
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="ve-insight-body">
+                                        <?php if ( $cats ) : ?>
+                                            <span class="ve-insight-cat"><?php echo esc_html( $cats[0]->name ); ?></span>
+                                        <?php endif; ?>
+                                        <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+                                        <p><?php echo wp_trim_words( get_the_excerpt(), 18 ); ?></p>
+                                        <div class="ve-insight-meta">
+                                            <span><i class="fa fa-calendar"></i> <?php echo esc_html( get_the_date( 'M d' ) ); ?></span>
+                                            <a href="<?php the_permalink(); ?>">Read More <i class="fa fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <?php
+                            $delay += 100;
+                        endwhile;
+                        wp_reset_postdata();
+                        ?>
+                    <?php else : ?>
+                        <div class="col-12 text-center" style="padding:40px 0;">
+                            <p>No insights published yet. Check back soon!</p>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                        <div class="ve-insight-card">
-                            <div class="ve-insight-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/11.jpg);">
-                            </div>
-                            <div class="ve-insight-body"><span class="ve-insight-cat">Credit</span>
-                                <h5><a href="<?php echo site_url('/single-post'); ?>">Understanding Your Credit Score in 2025</a></h5>
-                                <p>Learn the key factors that influence your credit score and how to improve it
-                                    fast.</p>
-                                <div class="ve-insight-meta"><span><i class="fa fa-calendar"></i> April 20</span><a
-                                        href="<?php echo site_url('/single-post'); ?>">Read More <i class="fa fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                        <div class="ve-insight-card">
-                            <div class="ve-insight-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/12.jpg);">
-                            </div>
-                            <div class="ve-insight-body"><span class="ve-insight-cat">Savings</span>
-                                <h5><a href="<?php echo site_url('/single-post'); ?>">Building Wealth in Your 30s — A Full Guide</a></h5>
-                                <p>The financial habits that set you up for lifelong prosperity.</p>
-                                <div class="ve-insight-meta"><span><i class="fa fa-calendar"></i> April 14</span><a
-                                        href="<?php echo site_url('/single-post'); ?>">Read More <i class="fa fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                        <div class="ve-insight-card">
-                            <div class="ve-insight-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/23.jpg);">
-                            </div>
-                            <div class="ve-insight-body"><span class="ve-insight-cat">Retirement</span>
-                                <h5><a href="<?php echo site_url('/single-post'); ?>">How to Retire Comfortably at 55</a></h5>
-                                <p>A step-by-step roadmap to early retirement with financial security intact.</p>
-                                <div class="ve-insight-meta"><span><i class="fa fa-calendar"></i> April 8</span><a
-                                        href="<?php echo site_url('/single-post'); ?>">Read More <i class="fa fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 wow fadeInUp" data-wow-delay="500ms">
-                        <div class="ve-insight-card">
-                            <div class="ve-insight-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/25.jpg);">
-                            </div>
-                            <div class="ve-insight-body"><span class="ve-insight-cat">Tax</span>
-                                <h5><a href="<?php echo site_url('/single-post'); ?>">Top Tax-Saving Strategies for High Earners</a></h5>
-                                <p>Legal, proven approaches to minimising your tax bill this year.</p>
-                                <div class="ve-insight-meta"><span><i class="fa fa-calendar"></i> March 30</span><a
-                                        href="<?php echo site_url('/single-post'); ?>">Read More <i class="fa fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 wow fadeInUp" data-wow-delay="600ms">
-                        <div class="ve-insight-card">
-                            <div class="ve-insight-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/26.jpg);">
-                            </div>
-                            <div class="ve-insight-body"><span class="ve-insight-cat">Markets</span>
-                                <h5><a href="<?php echo site_url('/single-post'); ?>">Navigating Market Volatility With Confidence</a></h5>
-                                <p>Expert guidance on staying strategic when markets swing wildly.</p>
-                                <div class="ve-insight-meta"><span><i class="fa fa-calendar"></i> March 22</span><a
-                                        href="<?php echo site_url('/single-post'); ?>">Read More <i class="fa fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
-                <div class="ve-pagination"><a href="#" class="active">1</a><a href="#">2</a><a href="#">3</a><a
-                        href="#"><i class="fa fa-chevron-right"></i></a></div>
+
+                <!-- Pagination -->
+                <div class="ve-pagination">
+                    <?php
+                    echo paginate_links( [
+                        'total'     => $posts_query->max_num_pages,
+                        'current'   => $paged,
+                        'prev_text' => '<i class="fa fa-chevron-left"></i>',
+                        'next_text' => '<i class="fa fa-chevron-right"></i>',
+                    ] );
+                    ?>
+                </div>
             </div>
             <div class="col-12 col-lg-4">
                 <div class="ve-sidebar">
-                    <div class="ve-sidebar-widget">
-                        <h5 class="ve-sidebar-title">Search</h5>
-                        <div class="ve-search-box"><input type="text" placeholder="Search articles..."><button><i
-                                    class="fa fa-search"></i></button></div>
-                    </div>
-                    <div class="ve-sidebar-widget">
-                        <h5 class="ve-sidebar-title">Categories</h5>
-                        <ul class="ve-cat-list">
-                            <li><a href="#">Investment <span>12</span></a></li>
-                            <li><a href="#">Wealth Management <span>8</span></a></li>
-                            <li><a href="#">Retirement <span>6</span></a></li>
-                            <li><a href="#">Tax Advisory <span>9</span></a></li>
-                            <li><a href="#">Market Analysis <span>15</span></a></li>
-                            <li><a href="#">Savings Tips <span>11</span></a></li>
-                        </ul>
-                    </div>
-                    <div class="ve-sidebar-widget">
-                        <h5 class="ve-sidebar-title">Recent Posts</h5>
-                        <div class="ve-recent-post">
-                            <div class="ve-rp-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/10.jpg);"></div>
-                            <div><a href="<?php echo site_url('/single-post'); ?>">5 Smart Investment Strategies for 2025</a><span><i
-                                        class="fa fa-calendar"></i> April 26</span></div>
-                        </div>
-                        <div class="ve-recent-post">
-                            <div class="ve-rp-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/11.jpg);"></div>
-                            <div><a href="<?php echo site_url('/single-post'); ?>">Understanding Your Credit Score</a><span><i
-                                        class="fa fa-calendar"></i> April 20</span></div>
-                        </div>
-                        <div class="ve-recent-post">
-                            <div class="ve-rp-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/12.jpg);"></div>
-                            <div><a href="<?php echo site_url('/single-post'); ?>">Building Wealth in Your 30s</a><span><i
-                                        class="fa fa-calendar"></i> April 14</span></div>
-                        </div>
-                    </div>
-                    <div class="ve-sidebar-widget">
-                        <h5 class="ve-sidebar-title">Popular Tags</h5>
-                        <div class="ve-tags"><a href="#">Investing</a><a href="#">Wealth</a><a
-                                href="#">Retirement</a><a href="#">Taxes</a><a href="#">Savings</a><a
-                                href="#">Portfolio</a><a href="#">Markets</a><a href="#">Planning</a><a
-                                href="#">ETFs</a></div>
-                    </div>
+                    <?php get_template_part( 'template-parts/components/sidebar' ); ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="ve-newsletter-section">
-    <div class="container">
-        <div class="ve-newsletter-wrap">
-            <div class="ve-nl-left"><i class="fa fa-envelope-o"></i>
-                <div>
-                    <h3>Stay Ahead of the Markets</h3>
-                    <p>Weekly insights — straight to your inbox.</p>
-                </div>
-            </div>
-            <div class="ve-nl-right">
-                <form class="ve-nl-form" action="#" method="post"><input type="email"
-                        placeholder="Enter your email address" required><button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+<?php get_template_part( 'template-parts/components/newsletter' ); ?>
 <?php get_footer(); ?>

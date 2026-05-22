@@ -44,31 +44,44 @@
                     <span class="ve-section-tag">Send a Message</span>
                     <h2>Book a <span>Free Consultation</span></h2>
                     <p>Fill in the form and one of our advisors will contact you within one business day.</p>
-                    <form class="ve-contact-form" action="#" method="post">
+                    <form class="ve-contact-form" id="ve-contact-form" novalidate>
+                        <?php wp_nonce_field( 've_contact_nonce', 've_nonce' ); ?>
+                        <div id="ve-form-message" style="display:none; padding:14px 18px; border-radius:8px; margin-bottom:20px; font-weight:600;"></div>
                         <div class="ve-form-row">
-                            <div class="ve-form-group"><label>Full Name</label><input type="text"
-                                    placeholder="Your full name" required></div>
-                            <div class="ve-form-group"><label>Email Address</label><input type="email"
-                                    placeholder="Your email" required></div>
+                            <div class="ve-form-group">
+                                <label for="ve_name">Full Name <span style="color:var(--ve-gold);">*</span></label>
+                                <input type="text" id="ve_name" name="ve_name" placeholder="Your full name" required>
+                            </div>
+                            <div class="ve-form-group">
+                                <label for="ve_email">Email Address <span style="color:var(--ve-gold);">*</span></label>
+                                <input type="email" id="ve_email" name="ve_email" placeholder="Your email" required>
+                            </div>
                         </div>
                         <div class="ve-form-row">
-                            <div class="ve-form-group"><label>Phone Number</label><input type="tel"
-                                    placeholder="Your phone"></div>
-                            <div class="ve-form-group"><label>Service Interested In</label>
-                                <select>
-                                    <option>Select a service</option>
-                                    <option>Investment Planning</option>
-                                    <option>Wealth Management</option>
-                                    <option>Retirement Planning</option>
-                                    <option>Tax Advisory</option>
-                                    <option>Risk Management</option>
+                            <div class="ve-form-group">
+                                <label for="ve_phone">Phone Number</label>
+                                <input type="tel" id="ve_phone" name="ve_phone" placeholder="Your phone">
+                            </div>
+                            <div class="ve-form-group">
+                                <label for="ve_service">Service Interested In</label>
+                                <select id="ve_service" name="ve_service">
+                                    <option value="">Select a service</option>
+                                    <option value="Investment Planning">Investment Planning</option>
+                                    <option value="Wealth Management">Wealth Management</option>
+                                    <option value="Retirement Planning">Retirement Planning</option>
+                                    <option value="Tax Advisory">Tax Advisory</option>
+                                    <option value="Risk Management">Risk Management</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="ve-form-group"><label>Your Message</label><textarea rows="5"
-                                placeholder="Tell us about your financial goals..."></textarea></div>
-                        <button type="submit" class="ve-btn-primary">Send Message <i
-                                class="fa fa-paper-plane"></i></button>
+                        <div class="ve-form-group">
+                            <label for="ve_message">Your Message <span style="color:var(--ve-gold);">*</span></label>
+                            <textarea id="ve_message" name="ve_message" rows="5"
+                                placeholder="Tell us about your financial goals..."></textarea>
+                        </div>
+                        <button type="submit" class="ve-btn-primary">
+                            Send Message <i class="fa fa-paper-plane"></i>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -95,10 +108,18 @@
                     <div class="ve-ca-social">
                         <h5>Connect With Us</h5>
                         <div class="ve-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <?php if ( ve_option( 've_facebook' ) ) : ?>
+                                <a href="<?php echo esc_url( ve_option( 've_facebook' ) ); ?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook"></i></a>
+                            <?php endif; ?>
+                            <?php if ( ve_option( 've_twitter' ) ) : ?>
+                                <a href="<?php echo esc_url( ve_option( 've_twitter' ) ); ?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter"></i></a>
+                            <?php endif; ?>
+                            <?php if ( ve_option( 've_linkedin' ) ) : ?>
+                                <a href="<?php echo esc_url( ve_option( 've_linkedin' ) ); ?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i></a>
+                            <?php endif; ?>
+                            <?php if ( ve_option( 've_instagram' ) ) : ?>
+                                <a href="<?php echo esc_url( ve_option( 've_instagram' ) ); ?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-instagram"></i></a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

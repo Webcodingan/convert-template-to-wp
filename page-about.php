@@ -84,6 +84,23 @@
 </section>
 
 <!-- TEAM -->
+<?php
+$team_query = new WP_Query( [
+    'post_type'      => 've_team',
+    'posts_per_page' => 8,
+    'post_status'    => 'publish',
+    'orderby'        => 'menu_order',
+    'order'          => 'ASC',
+] );
+// Fallback photos used when CPT has no posts yet
+$fallback_imgs = [ '15.jpg', '16.jpg', '17.jpg', '18.jpg' ];
+$fallback_team = [
+    [ 'name' => 'Jordan Hayes',  'role' => 'Chief Executive Officer' ],
+    [ 'name' => 'Taylor Brooks', 'role' => 'Chief Investment Officer' ],
+    [ 'name' => 'Morgan Lane',   'role' => 'Head of Wealth Planning' ],
+    [ 'name' => 'Casey Rivera',  'role' => 'Head of Risk &amp; Compliance' ],
+];
+?>
 <section class="ve-section ve-team-section">
     <div class="container">
         <div class="ve-section-header text-center">
@@ -92,94 +109,66 @@
             <p>Seasoned professionals with decades of combined experience across global financial markets.</p>
         </div>
         <div class="row">
-            <div class="col-12 col-sm-6 col-lg-3 wow fadeInUp" data-wow-delay="100ms">
-                <div class="ve-team-card">
-                    <div class="ve-team-img bg-img"
-                        style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/15.jpg);"></div>
-                    <div class="ve-team-info">
-                        <h5>Jordan Hayes</h5><span>Chief Executive Officer</span>
-                        <div class="ve-team-social"><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i
-                                    class="fa fa-twitter"></i></a></div>
+
+            <?php if ( $team_query->have_posts() ) : ?>
+                <?php
+                $delay = 100;
+                while ( $team_query->have_posts() ) :
+                    $team_query->the_post();
+                    $role     = ve_get_field( 've_team_role',     null, '' );
+                    $linkedin = ve_get_field( 've_team_linkedin', null, '#' );
+                    $twitter  = ve_get_field( 've_team_twitter',  null, '#' );
+                    $photo    = get_the_post_thumbnail_url( null, 've-square' );
+                    ?>
+                    <div class="col-12 col-sm-6 col-lg-3 wow fadeInUp" data-wow-delay="<?php echo absint( $delay ); ?>ms">
+                        <div class="ve-team-card">
+                            <?php if ( $photo ) : ?>
+                                <div class="ve-team-img bg-img"
+                                    style="background-image:url(<?php echo esc_url( $photo ); ?>);"></div>
+                            <?php endif; ?>
+                            <div class="ve-team-info">
+                                <h5><?php the_title(); ?></h5>
+                                <span><?php echo esc_html( $role ); ?></span>
+                                <div class="ve-team-social">
+                                    <?php if ( $linkedin && $linkedin !== '#' ) : ?>
+                                        <a href="<?php echo esc_url( $linkedin ); ?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i></a>
+                                    <?php endif; ?>
+                                    <?php if ( $twitter && $twitter !== '#' ) : ?>
+                                        <a href="<?php echo esc_url( $twitter ); ?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter"></i></a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3 wow fadeInUp" data-wow-delay="200ms">
-                <div class="ve-team-card">
-                    <div class="ve-team-img bg-img"
-                        style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/16.jpg);"></div>
-                    <div class="ve-team-info">
-                        <h5>Taylor Brooks</h5><span>Chief Investment Officer</span>
-                        <div class="ve-team-social"><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i
-                                    class="fa fa-twitter"></i></a></div>
+                    <?php
+                    $delay += 100;
+                endwhile;
+                wp_reset_postdata();
+                ?>
+
+            <?php else : ?>
+                <!-- Fallback — shown until Team CPT has members -->
+                <?php foreach ( $fallback_team as $idx => $member ) : ?>
+                    <div class="col-12 col-sm-6 col-lg-3 wow fadeInUp" data-wow-delay="<?php echo absint( ( $idx + 1 ) * 100 ); ?>ms">
+                        <div class="ve-team-card">
+                            <div class="ve-team-img bg-img"
+                                style="background-image:url(<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/bg-img/<?php echo esc_attr( $fallback_imgs[ $idx ] ); ?>);"></div>
+                            <div class="ve-team-info">
+                                <h5><?php echo esc_html( $member['name'] ); ?></h5>
+                                <span><?php echo wp_kses_post( $member['role'] ); ?></span>
+                                <div class="ve-team-social">
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3 wow fadeInUp" data-wow-delay="300ms">
-                <div class="ve-team-card">
-                    <div class="ve-team-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/17.jpg);"></div>
-                    <div class="ve-team-info">
-                        <h5>Morgan Lane</h5><span>Head of Wealth Planning</span>
-                        <div class="ve-team-social"><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i
-                                    class="fa fa-twitter"></i></a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3 wow fadeInUp" data-wow-delay="400ms">
-                <div class="ve-team-card">
-                    <div class="ve-team-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/18.jpg);"></div>
-                    <div class="ve-team-info">
-                        <h5>Casey Rivera</h5><span>Head of Risk &amp; Compliance</span>
-                        <div class="ve-team-social"><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i
-                                    class="fa fa-twitter"></i></a></div>
-                    </div>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
         </div>
     </div>
 </section>
-<section class="ve-counter-section">
-    <div class="container">
-        <div class="ve-counter-grid">
-            <div class="ve-counter-item wow fadeInUp" data-wow-delay="100ms">
-                <i class="fa fa-users"></i>
-                <strong class="counter" data-count="50000">0</strong><span>+</span>
-                <p>Happy Clients</p>
-            </div>
-            <div class="ve-counter-item wow fadeInUp" data-wow-delay="200ms">
-                <i class="fa fa-briefcase"></i>
-                <strong class="counter" data-count="4200">0</strong><span>M+</span>
-                <p>Assets Managed</p>
-            </div>
-            <div class="ve-counter-item wow fadeInUp" data-wow-delay="300ms">
-                <i class="fa fa-globe"></i>
-                <strong class="counter" data-count="30">0</strong><span>+</span>
-                <p>Countries Served</p>
-            </div>
-            <div class="ve-counter-item wow fadeInUp" data-wow-delay="400ms">
-                <i class="fa fa-trophy"></i>
-                <strong class="counter" data-count="18">0</strong><span></span>
-                <p>Industry Awards</p>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="ve-newsletter-section">
-    <div class="container">
-        <div class="ve-newsletter-wrap">
-            <div class="ve-nl-left">
-                <i class="fa fa-envelope-o"></i>
-                <div>
-                    <h3>Stay Ahead of the Markets</h3>
-                    <p>Weekly insights, tips, and exclusive offers — straight to your inbox.</p>
-                </div>
-            </div>
-            <div class="ve-nl-right">
-                <form class="ve-nl-form" action="#" method="post">
-                    <input type="email" placeholder="Enter your email address" required>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+<?php get_template_part( 'template-parts/sections/counters' ); ?>
+<?php get_template_part( 'template-parts/components/newsletter' ); ?>
 <?php get_footer(); ?>

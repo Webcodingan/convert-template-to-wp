@@ -202,6 +202,22 @@ h6 {
 .ve-mobile-menu.open {
   display: block;
 }
+
+/* ============================================================
+   CONTACT FORM FEEDBACK MESSAGES
+   ============================================================ */
+.ve-form-success {
+  background: rgba(39, 174, 96, 0.12);
+  border: 1px solid rgba(39, 174, 96, 0.4);
+  color: #27ae60;
+  border-radius: var(--ve-radius);
+}
+.ve-form-error {
+  background: rgba(231, 76, 60, 0.10);
+  border: 1px solid rgba(231, 76, 60, 0.35);
+  color: #e74c3c;
+  border-radius: var(--ve-radius);
+}
 .ve-mobile-menu ul {
   list-style: none;
   margin: 0;

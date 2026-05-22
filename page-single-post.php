@@ -107,67 +107,11 @@
             </div>
             <div class="col-12 col-lg-4">
                 <div class="ve-sidebar">
-                    <div class="ve-sidebar-widget">
-                        <h5 class="ve-sidebar-title">Search</h5>
-                        <div class="ve-search-box"><input type="text" placeholder="Search articles..."><button><i
-                                    class="fa fa-search"></i></button></div>
-                    </div>
-                    <div class="ve-sidebar-widget">
-                        <h5 class="ve-sidebar-title">Categories</h5>
-                        <ul class="ve-cat-list">
-                            <li><a href="#">Investment <span>12</span></a></li>
-                            <li><a href="#">Wealth Management <span>8</span></a></li>
-                            <li><a href="#">Retirement <span>6</span></a></li>
-                            <li><a href="#">Tax Advisory <span>9</span></a></li>
-                            <li><a href="#">Market Analysis <span>15</span></a></li>
-                            <li><a href="#">Savings Tips <span>11</span></a></li>
-                        </ul>
-                    </div>
-                    <div class="ve-sidebar-widget">
-                        <h5 class="ve-sidebar-title">Recent Posts</h5>
-                        <div class="ve-recent-post">
-                            <div class="ve-rp-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/10.jpg);"></div>
-                            <div><a href="<?php echo site_url('/single-post'); ?>">5 Smart Investment Strategies for 2025</a><span><i
-                                        class="fa fa-calendar"></i> April 26</span></div>
-                        </div>
-                        <div class="ve-recent-post">
-                            <div class="ve-rp-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/11.jpg);"></div>
-                            <div><a href="<?php echo site_url('/single-post'); ?>">Understanding Your Credit Score</a><span><i
-                                        class="fa fa-calendar"></i> April 20</span></div>
-                        </div>
-                        <div class="ve-recent-post">
-                            <div class="ve-rp-img bg-img" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/12.jpg);"></div>
-                            <div><a href="<?php echo site_url('/single-post'); ?>">Building Wealth in Your 30s</a><span><i
-                                        class="fa fa-calendar"></i> April 14</span></div>
-                        </div>
-                    </div>
-                    <div class="ve-sidebar-widget">
-                        <h5 class="ve-sidebar-title">Popular Tags</h5>
-                        <div class="ve-tags"><a href="#">Investing</a><a href="#">Wealth</a><a
-                                href="#">Retirement</a><a href="#">Taxes</a><a href="#">Savings</a><a
-                                href="#">Portfolio</a><a href="#">Markets</a><a href="#">Planning</a><a
-                                href="#">ETFs</a></div>
-                    </div>
+                    <?php get_template_part( 'template-parts/components/sidebar' ); ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="ve-newsletter-section">
-    <div class="container">
-        <div class="ve-newsletter-wrap">
-            <div class="ve-nl-left"><i class="fa fa-envelope-o"></i>
-                <div>
-                    <h3>Stay Ahead of the Markets</h3>
-                    <p>Weekly insights — straight to your inbox.</p>
-                </div>
-            </div>
-            <div class="ve-nl-right">
-                <form class="ve-nl-form" action="#" method="post"><input type="email"
-                        placeholder="Enter your email address" required><button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+<?php get_template_part( 'template-parts/components/newsletter' ); ?>
 <?php get_footer(); ?>

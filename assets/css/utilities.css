@@ -1,0 +1,128 @@
+/* ============================================================
+   VaultEdge — Utilities: Spacing Helpers, Layout Tokens
+   Load order: 2nd
+   ============================================================ */
+
+/* ---- SPACING ---- */
+.mt-30  { margin-top:    30px; }
+.mb-50  { margin-bottom: 50px; }
+.text-lg-right { text-align: right; }
+
+/* ---- SECTION WRAPPER ---- */
+.ve-section {
+  padding: 100px 0;
+}
+
+/* ---- SECTION HEADER ---- */
+.ve-section-header {
+  margin-bottom: 60px;
+}
+
+/* ---- SECTION TAG (pill-badge above headings) ---- */
+.ve-section-tag {
+  display: inline-block;
+  background: rgba(212, 160, 23, 0.1);
+  color: var(--ve-gold);
+  border: 1px solid rgba(212, 160, 23, 0.25);
+  border-radius: 50px;
+  padding: 5px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
+}
+
+/* ---- SECTION HEADER TYPOGRAPHY ---- */
+.ve-section-header h2 {
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--ve-dark);
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+.ve-section-header h2 span {
+  color: var(--ve-gold);
+}
+.ve-section-header p {
+  font-size: 16px;
+  color: var(--ve-text);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ---- SHARED BUTTON STYLES ---- */
+.ve-btn-primary {
+  display: inline-block;
+  background: var(--ve-gold);
+  color: var(--ve-dark);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: var(--ve-trans);
+}
+.ve-btn-primary:hover {
+  background: var(--ve-gold2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 160, 23, 0.4);
+  color: var(--ve-dark);
+}
+.ve-btn-ghost {
+  display: inline-block;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: var(--ve-trans);
+}
+.ve-btn-ghost:hover {
+  border-color: var(--ve-gold);
+  color: var(--ve-gold);
+  background: rgba(212, 160, 23, 0.08);
+}
+.ve-btn-white {
+  display: inline-block;
+  background: #fff;
+  color: var(--ve-dark);
+  padding: 16px 34px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 15px;
+  text-decoration: none;
+  transition: var(--ve-trans);
+}
+.ve-btn-white:hover {
+  background: var(--ve-gold);
+  color: var(--ve-dark);
+  transform: translateY(-2px);
+}
+
+/* ---- SOCIAL LINKS (shared across footer + contact) ---- */
+.ve-social {
+  display: flex;
+  gap: 10px;
+}
+.ve-social a {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  text-decoration: none;
+  transition: var(--ve-trans);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.ve-social a:hover {
+  background: var(--ve-gold);
+  color: var(--ve-dark);
+  border-color: var(--ve-gold);
+}

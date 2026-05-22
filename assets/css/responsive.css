@@ -1,0 +1,98 @@
+/* ============================================================
+   VaultEdge — Responsive: all @media breakpoints.
+   Load order: 5th (last — overrides everything above at
+   specific viewport widths)
+   ============================================================ */
+
+/* ---- XL → LG (< 1200px) ---- */
+@media (max-width: 1199px) {
+  .ve-hero-left               { padding: 70px 40px; }
+  .ve-hero-left h1            { font-size: 50px; }
+  .ve-services-grid           { grid-template-columns: repeat(2, 1fr); }
+  .ve-counter-grid            { grid-template-columns: repeat(2, 1fr); }
+  .ve-testi-grid              { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---- LG → MD (< 992px) ---- */
+@media (max-width: 991px) {
+  /* Hero */
+  .ve-hero                    { flex-direction: column; min-height: auto; }
+  .ve-hero-left               { flex: none; padding: 100px 30px 60px; }
+  .ve-hero-right              { flex: none; height: 350px; }
+
+  /* Navbar */
+  .ve-nav, .ve-nav-cta        { display: none; }
+  .ve-toggler                 { display: flex; }
+
+  /* Newsletter */
+  .ve-newsletter-wrap         { flex-direction: column; align-items: flex-start; }
+  .ve-nl-form                 { width: 100%; }
+  .ve-nl-form input           { flex: 1; width: auto; }
+
+  /* About */
+  .ve-about-text,
+  .ve-whyus-content           { padding-left: 0; margin-top: 30px; }
+
+  /* Contact */
+  .ve-contact-aside           { padding-left: 0; margin-top: 30px; }
+  .ve-contact-cards-grid      { grid-template-columns: 1fr; }
+
+  /* MVV + process */
+  .ve-mvv-grid                { grid-template-columns: 1fr; }
+  .ve-process-grid            { flex-direction: column; }
+  .ve-process-arrow           { transform: rotate(90deg); }
+
+  /* Sidebar */
+  .ve-sidebar                 { padding-left: 0; margin-top: 40px; }
+
+  /* Form */
+  .ve-form-row                { grid-template-columns: 1fr; }
+
+  /* Page hero */
+  .ve-page-hero-content h1    { font-size: 36px; }
+}
+
+/* ---- MD → SM (< 768px) ---- */
+@media (max-width: 767px) {
+  /* Hero */
+  .ve-hero-left h1            { font-size: 38px; }
+  .ve-hero-stats              { flex-wrap: wrap; gap: 16px; }
+  .ve-nav-wrap                { padding: 0 20px; }
+
+  /* Grids */
+  .ve-services-grid,
+  .ve-testi-grid,
+  .ve-counter-grid            { grid-template-columns: 1fr; }
+
+  /* Counter item border swap */
+  .ve-counter-item            { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .ve-counter-item:last-child { border-bottom: none; }
+
+  /* CTA */
+  .ve-cta-content h2          { font-size: 28px; }
+  .text-lg-right              { text-align: left; margin-top: 20px; }
+
+  /* Footer */
+  .ve-footer-bottom-inner     { flex-direction: column; text-align: center; }
+
+  /* About */
+  .ve-about-img-2             { display: none; }
+  .ve-about-img-stack         { padding-bottom: 30px; padding-right: 30px; }
+
+  /* Contact */
+  .ve-contact-form-wrap       { padding: 28px; }
+
+  /* Article */
+  .ve-article-body            { padding: 24px; }
+
+  /* Page hero */
+  .ve-page-hero-content h1    { font-size: 30px; }
+
+  /* Newsletter form */
+  .ve-nl-form                 { flex-direction: column; border-radius: 8px; }
+  .ve-nl-form input,
+  .ve-nl-form button          { width: 100%; border-radius: 8px !important; }
+
+  /* Testimonials */
+  .ve-testi-grid              { grid-template-columns: 1fr; }
+}
