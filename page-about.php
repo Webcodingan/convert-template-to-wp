@@ -1,52 +1,96 @@
-<?php get_header(); ?>
-<section class="ve-page-hero" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/13.jpg);">
+<?php
+/**
+ * Template Name: About Us
+ */
+
+get_header();
+
+// ── Field helpers with fallback defaults ──────────────────────────────────────
+$hero_tag       = ve_get_field( 've_about_hero_tag',   null, 'Our Story' );
+$hero_title     = ve_get_field( 've_about_hero_title', null, 'Building Trust Since' );
+$hero_year      = ve_get_field( 've_about_hero_year',  null, '2012' );
+$hero_bg        = ve_get_field( 've_about_hero_bg',    null, '' );
+$hero_bg_url    = $hero_bg ?: get_template_directory_uri() . '/assets/img/bg-img/13.jpg';
+
+$about_tag      = ve_get_field( 've_about_tag',        null, 'Who We Are' );
+$about_heading  = ve_get_field( 've_about_heading',    null, 'A Firm Built on' );
+$about_hl       = ve_get_field( 've_about_heading_hl', null, 'Integrity' );
+$about_lead     = ve_get_field( 've_about_lead',       null, 'We are a team of certified financial advisors and analysts dedicated to helping individuals and businesses achieve financial clarity and long-term prosperity.' );
+$about_body     = ve_get_field( 've_about_body',       null, 'Founded in San Francisco in 2012, VaultEdge started with a single mission: make professional wealth management accessible to everyone. Today, we manage over $4.2 billion in assets across 30+ countries.' );
+$about_feat_1   = ve_get_field( 've_about_feat_1',     null, 'Certified Financial Planners (CFP)' );
+$about_feat_2   = ve_get_field( 've_about_feat_2',     null, 'SEC Registered Investment Advisor' );
+$about_feat_3   = ve_get_field( 've_about_feat_3',     null, 'Fiduciary — we always act in your interest' );
+$about_feat_4   = ve_get_field( 've_about_feat_4',     null, 'No conflict-of-interest products' );
+$about_cta_text = ve_get_field( 've_about_cta_text',   null, 'View Our Services' );
+$about_cta_url  = ve_get_field( 've_about_cta_url',    null, site_url( '/services' ) );
+$ribbon_num     = ve_get_field( 've_about_ribbon_num', null, '12+' );
+$ribbon_lbl     = ve_get_field( 've_about_ribbon_lbl', null, 'Years of Trust' );
+$img_main_raw   = ve_get_field( 've_about_img_main',   null, '' );
+$img_accent_raw = ve_get_field( 've_about_img_accent', null, '' );
+$img_main       = $img_main_raw   ?: get_template_directory_uri() . '/assets/img/bg-img/14.jpg';
+$img_accent     = $img_accent_raw ?: get_template_directory_uri() . '/assets/img/bg-img/5.jpg';
+
+$mvv_tag        = ve_get_field( 've_mvv_tag',           null, 'Our Foundation' );
+$mvv_heading    = ve_get_field( 've_mvv_heading',       null, 'Mission, Vision &' );
+$mvv_hl         = ve_get_field( 've_mvv_heading_hl',    null, 'Values' );
+$mission_title  = ve_get_field( 've_mvv_mission_title', null, 'Our Mission' );
+$mission_text   = ve_get_field( 've_mvv_mission_text',  null, 'To democratise access to world-class financial planning, empowering every client to make smarter money decisions with confidence.' );
+$vision_title   = ve_get_field( 've_mvv_vision_title',  null, 'Our Vision' );
+$vision_text    = ve_get_field( 've_mvv_vision_text',   null, 'To be the most trusted financial partner for the next generation of wealth builders — globally recognised for integrity and innovation.' );
+$values_title   = ve_get_field( 've_mvv_values_title',  null, 'Our Values' );
+$values_text    = ve_get_field( 've_mvv_values_text',   null, 'Transparency, client-first thinking, continuous innovation, and an unwavering commitment to ethical financial practice.' );
+?>
+
+<!-- PAGE HERO -->
+<section class="ve-page-hero" style="background-image:url(<?php echo esc_url( $hero_bg_url ); ?>);">
     <div class="ve-page-hero-overlay"></div>
     <div class="container ve-page-hero-content">
-        <span class="ve-section-tag">Our Story</span>
-        <h1>Building Trust Since <span>2012</span></h1>
+        <span class="ve-section-tag"><?php echo esc_html( $hero_tag ); ?></span>
+        <h1><?php echo esc_html( $hero_title ); ?> <span><?php echo esc_html( $hero_year ); ?></span></h1>
         <nav aria-label="breadcrumb">
             <ol class="ve-breadcrumb">
-                <li><a href="<?php echo site_url('/'); ?>">Home</a></li>
+                <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
                 <li class="active">About Us</li>
             </ol>
         </nav>
     </div>
 </section>
 
-<!-- ABOUT SPLIT -->
+<!-- WHO WE ARE -->
 <section class="ve-section">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-lg-6 wow fadeInLeft" data-wow-delay="100ms">
                 <div class="ve-about-img-stack">
                     <div class="ve-about-img-1 bg-img"
-                        style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/14.jpg);"></div>
-
+                        style="background-image:url(<?php echo esc_url( $img_main ); ?>);"></div>
                     <div class="ve-about-img-2 bg-img"
-                        style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/5.jpg);"></div>
-                    <div class="ve-about-ribbon"><strong>12+</strong><span>Years of Trust</span></div>
+                        style="background-image:url(<?php echo esc_url( $img_accent ); ?>);"></div>
+                    <div class="ve-about-ribbon">
+                        <strong><?php echo esc_html( $ribbon_num ); ?></strong>
+                        <span><?php echo esc_html( $ribbon_lbl ); ?></span>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-lg-6 wow fadeInRight" data-wow-delay="200ms">
                 <div class="ve-about-text">
-                    <span class="ve-section-tag">Who We Are</span>
-                    <h2>A Firm Built on <span>Integrity</span> &amp; Results</h2>
-                    <p class="ve-lead">We are a team of certified financial advisors and analysts dedicated to
-                        helping individuals and businesses achieve financial clarity and long-term prosperity.</p>
-                    <p>Founded in San Francisco in 2012, VaultEdge started with a single mission: make professional
-                        wealth management accessible to everyone. Today, we manage over $4.2 billion in assets
-                        across 30+ countries.</p>
+                    <span class="ve-section-tag"><?php echo esc_html( $about_tag ); ?></span>
+                    <h2><?php echo esc_html( $about_heading ); ?> <span><?php echo esc_html( $about_hl ); ?></span></h2>
+                    <p class="ve-lead"><?php echo esc_html( $about_lead ); ?></p>
+                    <p><?php echo esc_html( $about_body ); ?></p>
                     <div class="ve-about-features">
-                        <div class="ve-af-item"><i class="fa fa-check"></i><span>Certified Financial Planners
-                                (CFP)</span></div>
-                        <div class="ve-af-item"><i class="fa fa-check"></i><span>SEC Registered Investment
-                                Advisor</span></div>
-                        <div class="ve-af-item"><i class="fa fa-check"></i><span>Fiduciary — we always act in your
-                                interest</span></div>
-                        <div class="ve-af-item"><i class="fa fa-check"></i><span>No conflict-of-interest
-                                products</span></div>
+                        <?php foreach ( [ $about_feat_1, $about_feat_2, $about_feat_3, $about_feat_4 ] as $feat ) : ?>
+                            <?php if ( $feat ) : ?>
+                                <div class="ve-af-item">
+                                    <i class="fa fa-check"></i>
+                                    <span><?php echo esc_html( $feat ); ?></span>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
-                    <a href="<?php echo site_url('/services'); ?>" class="ve-btn-primary mt-30">View Our Services</a>
+                    <a href="<?php echo esc_url( $about_cta_url ); ?>" class="ve-btn-primary mt-30">
+                        <?php echo esc_html( $about_cta_text ); ?>
+                    </a>
                 </div>
             </div>
         </div>
@@ -57,27 +101,24 @@
 <section class="ve-mvv-section">
     <div class="container">
         <div class="ve-section-header text-center">
-            <span class="ve-section-tag">Our Foundation</span>
-            <h2>Mission, Vision &amp; <span>Values</span></h2>
+            <span class="ve-section-tag"><?php echo esc_html( $mvv_tag ); ?></span>
+            <h2><?php echo esc_html( $mvv_heading ); ?> <span><?php echo esc_html( $mvv_hl ); ?></span></h2>
         </div>
         <div class="ve-mvv-grid">
             <div class="ve-mvv-card wow fadeInUp" data-wow-delay="100ms">
                 <div class="ve-mvv-icon"><i class="fa fa-bullseye"></i></div>
-                <h4>Our Mission</h4>
-                <p>To democratise access to world-class financial planning, empowering every client to make smarter
-                    money decisions with confidence.</p>
+                <h4><?php echo esc_html( $mission_title ); ?></h4>
+                <p><?php echo esc_html( $mission_text ); ?></p>
             </div>
             <div class="ve-mvv-card wow fadeInUp" data-wow-delay="250ms">
                 <div class="ve-mvv-icon"><i class="fa fa-eye"></i></div>
-                <h4>Our Vision</h4>
-                <p>To be the most trusted financial partner for the next generation of wealth builders — globally
-                    recognised for integrity and innovation.</p>
+                <h4><?php echo esc_html( $vision_title ); ?></h4>
+                <p><?php echo esc_html( $vision_text ); ?></p>
             </div>
             <div class="ve-mvv-card wow fadeInUp" data-wow-delay="400ms">
                 <div class="ve-mvv-icon"><i class="fa fa-heart"></i></div>
-                <h4>Our Values</h4>
-                <p>Transparency, client-first thinking, continuous innovation, and an unwavering commitment to
-                    ethical financial practice.</p>
+                <h4><?php echo esc_html( $values_title ); ?></h4>
+                <p><?php echo esc_html( $values_text ); ?></p>
             </div>
         </div>
     </div>
@@ -85,14 +126,13 @@
 
 <!-- TEAM -->
 <?php
-$team_query = new WP_Query( [
+$team_query    = new WP_Query( [
     'post_type'      => 've_team',
     'posts_per_page' => 8,
     'post_status'    => 'publish',
     'orderby'        => 'menu_order',
     'order'          => 'ASC',
 ] );
-// Fallback photos used when CPT has no posts yet
 $fallback_imgs = [ '15.jpg', '16.jpg', '17.jpg', '18.jpg' ];
 $fallback_team = [
     [ 'name' => 'Jordan Hayes',  'role' => 'Chief Executive Officer' ],
@@ -109,7 +149,6 @@ $fallback_team = [
             <p>Seasoned professionals with decades of combined experience across global financial markets.</p>
         </div>
         <div class="row">
-
             <?php if ( $team_query->have_posts() ) : ?>
                 <?php
                 $delay = 100;
@@ -145,9 +184,7 @@ $fallback_team = [
                 endwhile;
                 wp_reset_postdata();
                 ?>
-
             <?php else : ?>
-                <!-- Fallback — shown until Team CPT has members -->
                 <?php foreach ( $fallback_team as $idx => $member ) : ?>
                     <div class="col-12 col-sm-6 col-lg-3 wow fadeInUp" data-wow-delay="<?php echo absint( ( $idx + 1 ) * 100 ); ?>ms">
                         <div class="ve-team-card">
@@ -165,10 +202,10 @@ $fallback_team = [
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
-
         </div>
     </div>
 </section>
+
 <?php get_template_part( 'template-parts/sections/counters' ); ?>
 <?php get_template_part( 'template-parts/components/newsletter' ); ?>
 <?php get_footer(); ?>

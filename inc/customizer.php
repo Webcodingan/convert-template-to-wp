@@ -13,10 +13,13 @@ function vaultedge_customizer_register( $wp_customize ) {
     ] );
 
     $contact_fields = [
-        've_address' => [ 'Address',        '42 Harbor View, San Francisco, CA 94105' ],
-        've_phone'   => [ 'Phone Number',   '+1 800 555 0199' ],
-        've_email'   => [ 'Email Address',  'hello@vaultedge.com' ],
-        've_hours'   => [ 'Business Hours', 'Mon–Fri, 9am – 6pm' ],
+        've_address'      => [ 'Address',                      '42 Harbor View, San Francisco, CA 94105' ],
+        've_phone'        => [ 'Phone Number',                 '+1 800 555 0199' ],
+        've_email'        => [ 'Email Address',                'hello@vaultedge.com' ],
+        've_hours'        => [ 'Business Hours (short)',       'Mon–Fri, 9am – 6pm' ],
+        've_hours_monfri' => [ 'Office Hours — Mon–Fri',      '9:00 AM – 6:00 PM' ],
+        've_hours_sat'    => [ 'Office Hours — Saturday',     '10:00 AM – 2:00 PM' ],
+        've_hours_sun'    => [ 'Office Hours — Sunday',       'Closed' ],
     ];
 
     foreach ( $contact_fields as $key => [ $label, $default ] ) {
@@ -121,6 +124,9 @@ function ve_option( $key ) {
         've_phone'            => '+1 800 555 0199',
         've_email'            => 'hello@vaultedge.com',
         've_hours'            => 'Mon–Fri, 9am – 6pm',
+        've_hours_monfri'     => '9:00 AM – 6:00 PM',
+        've_hours_sat'        => '10:00 AM – 2:00 PM',
+        've_hours_sun'        => 'Closed',
         've_facebook'         => '',
         've_twitter'          => '',
         've_linkedin'         => '',

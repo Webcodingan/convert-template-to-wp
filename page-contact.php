@@ -1,49 +1,106 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Template Name: Contact Us
+ */
 
-<section class="ve-page-hero" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg-img/22.jpg);">
+get_header();
+
+// ── ACF fields ────────────────────────────────────────────────────────────────
+$hero_tag       = ve_get_field( 've_con_hero_tag',       null, 'Get In Touch' );
+$hero_title     = ve_get_field( 've_con_hero_title',     null, "We'd Love to" );
+$hero_title_hl  = ve_get_field( 've_con_hero_title_hl',  null, 'Hear From You' );
+$hero_bg_raw    = ve_get_field( 've_con_hero_bg',        null, '' );
+$hero_bg_url    = $hero_bg_raw ?: get_template_directory_uri() . '/assets/img/bg-img/22.jpg';
+
+$form_tag       = ve_get_field( 've_con_form_tag',       null, 'Send a Message' );
+$form_heading   = ve_get_field( 've_con_form_heading',   null, 'Book a' );
+$form_heading_hl = ve_get_field( 've_con_form_heading_hl', null, 'Free Consultation' );
+$form_subtext   = ve_get_field( 've_con_form_subtext',   null, 'Fill in the form and one of our advisors will contact you within one business day.' );
+
+$aside_title    = ve_get_field( 've_con_aside_title', null, 'Why Clients Choose Us' );
+$aside_points   = array_filter( [
+    ve_get_field( 've_con_aside_pt1', null, 'Free initial consultation' ),
+    ve_get_field( 've_con_aside_pt2', null, 'Response within 24 hours' ),
+    ve_get_field( 've_con_aside_pt3', null, 'No sales pressure — ever' ),
+    ve_get_field( 've_con_aside_pt4', null, 'Certified financial planners' ),
+    ve_get_field( 've_con_aside_pt5', null, 'Fiduciary standard of care' ),
+] );
+
+// ── Customizer fields (global business info) ──────────────────────────────────
+$address        = ve_option( 've_address' );
+$phone          = ve_option( 've_phone' );
+$email          = ve_option( 've_email' );
+$hours_short    = ve_option( 've_hours' );
+$hours_monfri   = ve_option( 've_hours_monfri' );
+$hours_sat      = ve_option( 've_hours_sat' );
+$hours_sun      = ve_option( 've_hours_sun' );
+?>
+
+<!-- PAGE HERO -->
+<section class="ve-page-hero" style="background-image:url(<?php echo esc_url( $hero_bg_url ); ?>);">
     <div class="ve-page-hero-overlay"></div>
     <div class="container ve-page-hero-content">
-        <span class="ve-section-tag">Get In Touch</span>
-        <h1>We'd Love to <span>Hear From You</span></h1>
+        <span class="ve-section-tag"><?php echo esc_html( $hero_tag ); ?></span>
+        <h1><?php echo esc_html( $hero_title ); ?> <span><?php echo esc_html( $hero_title_hl ); ?></span></h1>
         <nav aria-label="breadcrumb">
             <ol class="ve-breadcrumb">
-                <li><a href="<?php echo site_url('/'); ?>">Home</a></li>
+                <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
                 <li class="active">Contact</li>
             </ol>
         </nav>
     </div>
 </section>
 
+<!-- CONTACT INFO CARDS -->
 <section class="ve-contact-cards-section">
     <div class="container">
         <div class="ve-contact-cards-grid">
+            <?php if ( $address ) : ?>
             <div class="ve-contact-info-card wow fadeInUp" data-wow-delay="100ms">
                 <div class="ve-ci-icon"><i class="fa fa-map-marker"></i></div>
                 <h5>Visit Our Office</h5>
-                <p>42 Harbor View, San Francisco, CA 94105</p>
+                <p><?php echo esc_html( $address ); ?></p>
             </div>
+            <?php endif; ?>
+            <?php if ( $phone ) : ?>
             <div class="ve-contact-info-card wow fadeInUp" data-wow-delay="250ms">
                 <div class="ve-ci-icon"><i class="fa fa-phone"></i></div>
                 <h5>Call Us</h5>
-                <p>+1 800 555 0199<br><small>Mon–Fri, 9am – 6pm PST</small></p>
+                <p>
+                    <a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $phone ) ); ?>" style="color:inherit;">
+                        <?php echo esc_html( $phone ); ?>
+                    </a>
+                    <?php if ( $hours_short ) : ?>
+                        <br><small><?php echo esc_html( $hours_short ); ?></small>
+                    <?php endif; ?>
+                </p>
             </div>
+            <?php endif; ?>
+            <?php if ( $email ) : ?>
             <div class="ve-contact-info-card wow fadeInUp" data-wow-delay="400ms">
                 <div class="ve-ci-icon"><i class="fa fa-envelope"></i></div>
                 <h5>Email Us</h5>
-                <p>hello@vaultedge.com<br><small>We reply within 24 hours</small></p>
+                <p>
+                    <a href="mailto:<?php echo esc_attr( $email ); ?>" style="color:inherit;">
+                        <?php echo esc_html( $email ); ?>
+                    </a>
+                    <br><small>We reply within 24 hours</small>
+                </p>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </section>
 
+<!-- CONTACT FORM + ASIDE -->
 <section class="ve-section ve-contact-section">
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-7 wow fadeInLeft" data-wow-delay="100ms">
                 <div class="ve-contact-form-wrap">
-                    <span class="ve-section-tag">Send a Message</span>
-                    <h2>Book a <span>Free Consultation</span></h2>
-                    <p>Fill in the form and one of our advisors will contact you within one business day.</p>
+                    <span class="ve-section-tag"><?php echo esc_html( $form_tag ); ?></span>
+                    <h2><?php echo esc_html( $form_heading ); ?> <span><?php echo esc_html( $form_heading_hl ); ?></span></h2>
+                    <p><?php echo esc_html( $form_subtext ); ?></p>
                     <form class="ve-contact-form" id="ve-contact-form" novalidate>
                         <?php wp_nonce_field( 've_contact_nonce', 've_nonce' ); ?>
                         <div id="ve-form-message" style="display:none; padding:14px 18px; border-radius:8px; margin-bottom:20px; font-weight:600;"></div>
@@ -87,22 +144,22 @@
             </div>
             <div class="col-12 col-lg-5 wow fadeInRight" data-wow-delay="200ms">
                 <div class="ve-contact-aside">
+                    <?php if ( $aside_points ) : ?>
                     <div class="ve-ca-box">
-                        <h4>Why Clients Choose Us</h4>
+                        <h4><?php echo esc_html( $aside_title ); ?></h4>
                         <ul class="ve-ca-list">
-                            <li><i class="fa fa-check-circle"></i> Free initial consultation</li>
-                            <li><i class="fa fa-check-circle"></i> Response within 24 hours</li>
-                            <li><i class="fa fa-check-circle"></i> No sales pressure — ever</li>
-                            <li><i class="fa fa-check-circle"></i> Certified financial planners</li>
-                            <li><i class="fa fa-check-circle"></i> Fiduciary standard of care</li>
+                            <?php foreach ( $aside_points as $point ) : ?>
+                                <li><i class="fa fa-check-circle"></i> <?php echo esc_html( $point ); ?></li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
+                    <?php endif; ?>
                     <div class="ve-ca-hours">
                         <h5><i class="fa fa-clock-o"></i> Office Hours</h5>
                         <ul>
-                            <li><span>Monday – Friday</span><strong>9:00 AM – 6:00 PM</strong></li>
-                            <li><span>Saturday</span><strong>10:00 AM – 2:00 PM</strong></li>
-                            <li><span>Sunday</span><strong>Closed</strong></li>
+                            <li><span>Monday – Friday</span><strong><?php echo esc_html( $hours_monfri ); ?></strong></li>
+                            <li><span>Saturday</span><strong><?php echo esc_html( $hours_sat ); ?></strong></li>
+                            <li><span>Sunday</span><strong><?php echo esc_html( $hours_sun ); ?></strong></li>
                         </ul>
                     </div>
                     <div class="ve-ca-social">
@@ -127,4 +184,5 @@
         </div>
     </div>
 </section>
+
 <?php get_footer(); ?>
